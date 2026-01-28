@@ -44,8 +44,7 @@ phases:
     commands:
       # Push the built Docker image to ECR repository
       - echo "Pushing Docker image to ECR..."
-      - docker push $IMAGE_URI:$IMAGE_TAG
-      - docker push $IMAGE_URI:$IMAGE_TAG_BUILD
+      - docker push $IMAGE_URI:$IMAGE_TAG:$IMAGE_TAG_BUILD
       # Export image metadata to be used in the deploy stage
       - echo "Exporting variables for downstream stages..."
       - echo "IMAGE_URI=$IMAGE_URI" >> $CODEBUILD_SRC_DIR/exported-vars.env
