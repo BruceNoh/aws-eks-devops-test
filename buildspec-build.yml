@@ -23,7 +23,7 @@ phases:
     commands:
       # Generate a short Docker image tag using GitHub commit SHA (7 characters)
       - IMAGE_TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7)"
-      - export IMAGE_TAG
+      - export ${IMAGE_TAG}.0
       # Authenticate Docker with ECR using AWS CLI
       - echo "Logging into Amazon ECR at $IMAGE_URI..."
       - aws ecr get-login-password | docker login --username AWS --password-stdin $IMAGE_URI
@@ -38,7 +38,7 @@ phases:
     commands:
       # Push the built Docker image to ECR repository
       - echo "Pushing Docker image to ECR..."
-      - docker push $IMAGE_URI:${IMAGE_TAG}.0
+      - docker push $IMAGE_URI:$IMAGE_TAG
       # Export image metadata to be used in the deploy stage
       - echo "Exporting variables for downstream stages..."
       - echo "IMAGE_URI=$IMAGE_URI" >> $CODEBUILD_SRC_DIR/exported-vars.env
