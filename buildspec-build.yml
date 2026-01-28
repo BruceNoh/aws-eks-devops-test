@@ -6,8 +6,8 @@ version: 0.2
 env:
   variables:
     # ECR URI where Docker image will be pushed
-    #IMAGE_URI: "820825185444.dkr.ecr.ap-northeast-2.amazonaws.com/eks-devops-mj"
-    IMAGE_URI: "820825185444.dkr.ecr.ap-northeast-2.amazonaws.com/eks-devops-mj" 
+    IMAGE_URI: "820825185444.dkr.ecr.ap-northeast-2.amazonaws.com/eks-devops-mj"
+    #IMAGE_URI: "820825185444.dkr.ecr.ap-northeast-2.amazonaws.com/simple-docker-service-0a0219e4e3f5"
   exported-variables:
     # Variables that will be shared with downstream phases or pipelines
     - IMAGE_URI
