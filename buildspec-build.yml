@@ -12,6 +12,9 @@ env:
     # Variables that will be shared with downstream phases or pipelines
     - IMAGE_URI
     - IMAGE_TAG
+    - IMAGE_TAG_BUILD
+    - IMAGE_TAG_LATEST
+    - IMAGE_DIGEST
 
 phases:
   install:
@@ -24,6 +27,9 @@ phases:
       # Generate a short Docker image tag using GitHub commit SHA (7 characters)
       - IMAGE_TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7)"
       - export IMAGE_TAG
+      # Build Number, add is codeBuild
+      - IMAGE_TAG_BUILD="build-${CODEBUILD_BUILD_NUMBER}"
+      - export IMAGE_TAG_BUILD
       # Authenticate Docker with ECR using AWS CLI
       - echo "Logging into Amazon ECR at $IMAGE_URI..."
       - aws ecr get-login-password | docker login --username AWS --password-stdin $IMAGE_URI
@@ -39,6 +45,7 @@ phases:
       # Push the built Docker image to ECR repository
       - echo "Pushing Docker image to ECR..."
       - docker push $IMAGE_URI:$IMAGE_TAG
+      - docker push $IMAGE_URI:$IMAGE_TAG_BUILD
       # Export image metadata to be used in the deploy stage
       - echo "Exporting variables for downstream stages..."
       - echo "IMAGE_URI=$IMAGE_URI" >> $CODEBUILD_SRC_DIR/exported-vars.env
