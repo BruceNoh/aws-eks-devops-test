@@ -10,6 +10,7 @@ env:
   exported-variables:
     # Variables that will be shared with downstream phases or pipelines
     - IMAGE_URI
+    - GITHUB_COMMIT_CODE
     - IMAGE_TAG
 
 phases:
@@ -43,6 +44,7 @@ phases:
       # Export image metadata to be used in the deploy stage
       - echo "Exporting variables for downstream stages..."
       - echo "IMAGE_URI=$IMAGE_URI" >> $CODEBUILD_SRC_DIR/exported-vars.env
+      - echo "GIT_COMMIT_CODE=$GIT_COMMIT_CODE" >> $CODEBUILD_SRC_DIR/exported-vars.env
       - echo "IMAGE_TAG=$IMAGE_TAG" >> $CODEBUILD_SRC_DIR/exported-vars.env
 
 # Files that will be included as artifacts for the next stage
