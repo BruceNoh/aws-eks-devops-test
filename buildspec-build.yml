@@ -21,9 +21,8 @@ phases:
   pre_build:
     commands:
       # Generate a short Docker image tag using GitHub commit SHA (7 characters)
-      set -e
       #- IMAGE_TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7)"
-      echo "CODEBUILD_BUILD_NUMBER=${CODEBUILD_BUILD_NUMBER}"
+      - echo "CODEBUILD_BUILD_NUMBER=${CODEBUILD_BUILD_NUMBER}"
       - IMAGE_TAG="${CODEBUILD_BUILD_NUMBER}.0"
       - export IMAGE_TAG
       # Authenticate Docker with ECR using AWS CLI
