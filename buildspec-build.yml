@@ -34,17 +34,17 @@ phases:
     commands:
       # Build Docker image using Dockerfile in root directory
       - echo "Building Docker image..."
-      - docker build -t $IMAGE_URI:$GITHUB_COMMIT_CODE-$IMAGE_TAG .
+      - docker build -t $IMAGE_URI:$IMAGE_TAG .
 
   post_build:
     commands:
       # Push the built Docker image to ECR repository
       - echo "Pushing Docker image to ECR..."
-      - docker push $IMAGE_URI:$GITHUB_COMMIT_CODE-$IMAGE_TAG
+      - docker push $IMAGE_URI:$IMAGE_TAG
       # Export image metadata to be used in the deploy stage
       - echo "Exporting variables for downstream stages..."
       - echo "IMAGE_URI=$IMAGE_URI" >> $CODEBUILD_SRC_DIR/exported-vars.env
-      - echo "GITHUB_COMMIT_CODE=$GITHUB_COMMIT_CODE" >> $CODEBUILD_SRC_DIR/exported-vars.env
+      #- echo "GITHUB_COMMIT_CODE=$GITHUB_COMMIT_CODE" >> $CODEBUILD_SRC_DIR/exported-vars.env
       - echo "IMAGE_TAG=$IMAGE_TAG" >> $CODEBUILD_SRC_DIR/exported-vars.env
 
 # Files that will be included as artifacts for the next stage

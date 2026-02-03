@@ -30,11 +30,11 @@ phases:
       - echo "Sourcing env variables from file"
       - source ./exported-vars.env
       - echo "IMAGE_URI=$IMAGE_URI"
-      - echo "GITHUB_COMMIT_CODE=$GITHUB_COMMIT_CODE"
+      #- echo "GITHUB_COMMIT_CODE=$GITHUB_COMMIT_CODE"
       - echo "IMAGE_TAG=$IMAGE_TAG"
       # Replace placeholder in Kubernetes YAML with actual image URI and tag
       - echo "Updating container image in the Kubernetes Deployment YAML file..."
-      - sed -i 's@CONTAINER_IMAGE@'"$IMAGE_URI:$GITHUB_COMMIT_CODE-$IMAGE_TAG"'@' kube-manifests/01-DEVOPS-Nginx-Deployment.yml
+      - sed -i 's@CONTAINER_IMAGE@'"$IMAGE_URI:$IMAGE_TAG"'@' kube-manifests/01-DEVOPS-Nginx-Deployment.yml
       - echo "Updated deployment manifest content:"
       - cat kube-manifests/01-DEVOPS-Nginx-Deployment.yml
 
