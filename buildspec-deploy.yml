@@ -9,8 +9,9 @@ env:
     EKS_CLUSTER_NAME: "eks-demo-mj"
     # IAM Role ARN used to assume access to EKS for kubectl
     # EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:role/NodeGroupAddRole-mj"
-    EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:role/EksCodeBuildKubectlRole"
-    EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:policy/eks-codebuild-sts-assume-role-mj"
+    # EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:role/EksCodeBuildKubectlRole"
+    # EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:policy/eks-codebuild-sts-assume-role-mj"
+    EKS_KUBECTL_ROLE_ARN: "arn:aws:iam::820825185444:role/service-role/codebuild-deploy-eks-devops-mj-service-role"
 
 phases:
   install:
