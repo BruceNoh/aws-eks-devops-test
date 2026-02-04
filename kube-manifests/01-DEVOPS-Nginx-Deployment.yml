@@ -17,6 +17,6 @@ spec:
       containers:
         - name: eks-devops
           # original_image_container_path: ghcr.io/stacksimplify/kube-nginxapp1:1.0.0 (FOR TESTING OR PRE-REQUISITE CHECKS)
-          image: ghcr.io/stacksimplify/kube-nginxapp1:1.0.0 
+          image: 820825185444.dkr.ecr.ap-northeast-2.amazonaws.com/aws-eks-devops-test:1.0
           ports:
             - containerPort: 80

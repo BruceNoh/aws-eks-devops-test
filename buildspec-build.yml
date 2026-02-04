@@ -38,7 +38,7 @@ phases:
 
       # >>> Start: manifest image: value change <<<
       - echo "Updating image tag in Kubernetes manifest..."
-      - MANIFEST_FILE="app1/01-DEVOPS-Nginx-Deployment.yml"
+      - MANIFEST_FILE="kube-manifests/01-DEVOPS-Nginx-Deployment.yml"
       # image: line overwrite (code indentation). GNU sed.
       - sed -Ei 's|^( *image:).*|\1 '"$IMAGE_URI:$IMAGE_TAG"'|' "$MANIFEST_FILE"
       # log output 
