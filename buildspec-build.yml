@@ -36,6 +36,16 @@ phases:
       - echo "Building Docker image..."
       - docker build -t $IMAGE_URI:$IMAGE_TAG .
 
+      # >>> Start: manifest image: value change <<<
+      - echo "Updating image tag in Kubernetes manifest..."
+      - MANIFEST_FILE="app1/01-DEVOPS-Nginx-Deployment.yml"
+      # image: line overwrite (code indentation). GNU sed.
+      - sed -Ei 's|^( *image:).*|\1 '"$IMAGE_URI:$IMAGE_TAG"'|' "$MANIFEST_FILE"
+      # log output 
+      - echo "[Verify] Updated image line:"
+      - grep -nE 'image:' "$MANIFEST_FILE" || true
+      # >>> The End <<<
+
   post_build:
     commands:
       # Push the built Docker image to ECR repository
